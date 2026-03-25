@@ -442,6 +442,12 @@ def scrape_html(url):
     except Exception as e:
         return f"Error: {str(e)}", 500
 
+@bp.route('/newsnow/<path:tag>')
+@swr_cache(timeout=1800)  # 30分钟缓存
+def newsnow_ai(tag):
+    from rsshub.spiders.newsnow.news import ctx
+    return render_template('main/atom.xml', **filter_content(ctx(tag)))
+
 
 @bp.route('/randomword/<string:category>')
 @bp.route('/randomword')

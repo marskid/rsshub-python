@@ -1,10 +1,10 @@
-from flask_bootstrap import Bootstrap
+from flask_bootstrap import Bootstrap4
 from flask_moment import Moment
 from flask_caching import Cache
 import os
 
 
-bootstrap = Bootstrap()
+bootstrap = Bootstrap4()
 moment = Moment()
 
 # 仅在开发环境中导入和初始化 debugtoolbar

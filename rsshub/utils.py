@@ -66,7 +66,7 @@ def filter_content(items):
     return content
 
 
-def swr_cache(timeout=3600):
+def swr_cache(timeout=3600, preload=False):
     """
     Stale-While-Revalidate Cache Decorator
     
@@ -117,7 +117,23 @@ def swr_cache(timeout=3600):
             result = f(*args, **kwargs)
             cache.set(cache_key, (result, arrow.now().timestamp()), timeout=timeout * 24 * 7) 
             return result
+        # ========== 添加预加载支持 ==========
+        if preload:
+            def preload_on_first():
+                """第一次请求时预加载"""
+                try:
+                    from flask import current_app
+                    with current_app.app_context():
+                        with current_app.test_request_context(path='/'):
+                            print(f"[SWR] Preloading {f.__name__}")
+                            result = f(*args, **kwargs)
+                            print(f"[SWR] Preload completed")
+                except Exception as e:
+                    print(f"[SWR] Preload failed: {e}")
             
+            # 使用全局 app（需要在应用创建后设置）
+            from server import app as global_app
+            global_app.before_first_request(preload_on_first)
         return decorated_function
     return decorator
 
