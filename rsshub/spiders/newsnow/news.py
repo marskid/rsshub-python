@@ -82,6 +82,10 @@ async def get_ai_news(tag):
                     if not title_text or not link_url:
                         continue
                     
+                    match = re.search(r'/(\d+)(?:\?|$)', link_url)
+                    if match:
+                        link_url = f"https://c.newsnow.co.uk/A/3/{match.group(1)}"
+                    
                     # 尝试获取额外的信息（可选）
                     # 查找父级元素中的来源、时间等
                     parent = link.find_parent()
