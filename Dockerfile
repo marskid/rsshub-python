@@ -8,12 +8,16 @@ COPY . .
 
 # Install Python dependencies
 # Official image has system dependencies, we just need python deps
+ENV PIP_INDEX_URL=https://mirrors.tencent.com/pypi/simple/ \
+    PIP_TRUSTED_HOST=mirrors.tencent.com \
 RUN pip install --no-cache-dir -r requirements-full.txt && \
     playwright install chromium
 
 # Set production environment variables
-ENV FLASK_CONFIG=production
-ENV FLASK_ENV=production
+ENV FLASK_CONFIG=production \
+    FLASK_ENV=production \
+    PYTHONUNBUFFERED=1 \
+    PYTHONDONTWRITEBYTECODE=1
 
 # Expose port
 EXPOSE 5000

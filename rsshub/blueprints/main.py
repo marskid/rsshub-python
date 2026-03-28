@@ -27,12 +27,12 @@ def works(search='', order='create_date', subtitle=0, sort='desc'):
 
 
 @bp.route('/word/<string:category>')
-@bp.route('/')
 @cache.cached(timeout=3600)
 def word(category=''):
     from rsshub.spiders.word.word import ctx
     return render_template('main/word.html', **ctx(category))
 
+@bp.route('/')
 @bp.route('/index')
 def index():
     return render_template('main/index.html')
@@ -392,6 +392,12 @@ def tadoku_books(category=''):
 @bp.route('/filter/')
 def rss_filter():
     from rsshub.spiders.rssfilter.filter import ctx
+    feed_url = request.args.get("feed")
+    return render_template('main/atom.xml', **filter_content(ctx(feed_url)))
+
+@bp.route('/translate/')
+def rss_translate():
+    from rsshub.translate.tmt import ctx
     feed_url = request.args.get("feed")
     return render_template('main/atom.xml', **filter_content(ctx(feed_url)))
 

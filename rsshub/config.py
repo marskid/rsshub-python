@@ -7,9 +7,10 @@ basedir = os.path.abspath(os.path.dirname(os.path.dirname(__file__)))
 
 class BaseConfig:
     SITE_NAME = 'RSSHub'
-    GITHUB_USERNAME = 'alphardex'
-    EMAIL = '2582347430@qq.com'
-    SECRET_KEY = os.environ.get('SECRET_KEY') or 'f43hrt53et53'
+    GITHUB_USERNAME = ''
+    EMAIL = ''
+    BASE_URL = os.environ.get('BASE_URL') or 'http://127.0.0.1:5000'
+    SECRET_KEY = os.environ.get('SECRET_KEY') or 'fga43534gsd5'
     DEBUG_TB_INTERCEPT_REDIRECTS = False
 
 

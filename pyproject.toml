@@ -27,6 +27,10 @@ dependencies = [
     "EbookLib>=0.17.1",
     "mobi>=0.3.3",
     "pymupdf>=1.25.0",
+    "tencentcloud-sdk-python-common[async]>=3.1.64",
+    "tencentcloud-sdk-python-tmt>=3.1.59",
+    "redis>=7.4.0",
+    "aiohttp>=3.13.3",
 ]
 
 [project.optional-dependencies]

@@ -33,7 +33,7 @@ def readability():
 
     try:
         # manual fetch with requests to control headers and proxies
-        response = requests.get(url, headers=DEFAULT_HEADERS, proxies=proxies, timeout=30)
+        response = requests.get(url, headers=DEFAULT_HEADERS, proxies=proxies, timeout=30, verify=False)
         response.raise_for_status()
         
         # pass the html content to trafilatura

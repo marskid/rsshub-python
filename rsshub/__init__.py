@@ -6,10 +6,10 @@ from flask.cli import with_appcontext
 from rsshub.config import config
 from rsshub.extensions import *
 from rsshub.blueprints.main import bp as main_bp
+from rsshub.blueprints.jina import bp as jina_bp
 from rsshub.blueprints.proxy import bp as proxy_bp
 from rsshub.utils import XMLResponse
 from rsshub.extensions import cache
-
 
 def create_app(config_name=None):
     if config_name is None:
@@ -19,7 +19,6 @@ def create_app(config_name=None):
     app = Flask(__name__)
     app.config.from_object(config[config_name])
     app.response_class = XMLResponse
-    cache.init_app(app)
 
     # Add analytics
     # try:
@@ -42,6 +41,7 @@ def create_app(config_name=None):
 
 
 def register_extensions(app):
+    cache.init_app(app)
     bootstrap.init_app(app)
     moment.init_app(app)
     
@@ -52,6 +52,7 @@ def register_extensions(app):
 
 def register_blueprints(app):
     app.register_blueprint(main_bp)
+    app.register_blueprint(jina_bp)
     app.register_blueprint(proxy_bp)
 
 
