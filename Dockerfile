@@ -9,7 +9,8 @@ COPY . .
 # Install Python dependencies
 # Official image has system dependencies, we just need python deps
 ENV PIP_INDEX_URL=https://mirrors.tencent.com/pypi/simple/ \
-    PIP_TRUSTED_HOST=mirrors.tencent.com \
+    PIP_TRUSTED_HOST=mirrors.tencent.com
+
 RUN pip install --no-cache-dir -r requirements-full.txt && \
     playwright install chromium
 
