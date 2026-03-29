@@ -61,7 +61,7 @@ def web():
             status=200,
         )
     except asyncio.TimeoutError:
-        println("Jina API request timed out after 30 seconds")
+        print("Jina API request timed out after 30 seconds")
         return Response(
             response="Jina API request timed out after 30 seconds",
             status=504,
