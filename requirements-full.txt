@@ -39,7 +39,6 @@ lxml==6.0.2
 lxml-html-clean==0.4.4
 markupsafe==3.0.3
 mobi==0.4.1
-msvc-runtime==14.42.34433
 multidict==6.7.1
 packaging==26.0
 parsel==1.8.1
