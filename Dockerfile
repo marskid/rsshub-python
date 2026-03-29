@@ -24,4 +24,4 @@ ENV FLASK_CONFIG=production \
 EXPOSE 5000
 
 # Start app using PORT environment variable (default 5000) for compatibility with Zeabur/Heroku
-CMD gunicorn -b 0.0.0.0:${PORT:-5000} main:app --timeout 120 --workers 1
+CMD ["/usr/bin/python", "server.py"]
